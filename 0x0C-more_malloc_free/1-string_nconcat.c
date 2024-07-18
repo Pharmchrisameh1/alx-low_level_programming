@@ -52,3 +52,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		str[index++] = s2[i];
 	str[index] = '\0';
 
+	return (str);
+}
