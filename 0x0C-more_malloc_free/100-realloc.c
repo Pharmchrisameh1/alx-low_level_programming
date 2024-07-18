@@ -2,30 +2,49 @@
 #include <stdlib.h>
 
 /**
- * array_range - create an array of integers
- * @min: the least integer
- * @max: the highest integer
+ * _realloc - reallocate a memory block using malloc and free
+ * @ptr: pointer to the old memory block
+ * @old_size: size of ptr
+ * @new_size: intended size of the reallocated memory block
  *
- * Return: a pointer to the array
+ * Return: a pointer to the new memory block
+ *	   or NULL in unwanted circumstances
  */
-int *array_range(int min, int max)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	int *arr;
-	int i;
+	void *ptr2;
+	unsigned int i, size;
+	char *filler, *source;
 
-	if (min > max)
-		return (NULL);
-
-	arr = malloc(sizeof(int) * ((max - min) + 1));
-
-	if (arr == NULL)
-		return (NULL);
-
-	for (i = 0; min <= max; i++)
+	if (ptr == NULL)
 	{
-		arr[i] = min;
-		min++;
+		ptr2 = malloc(new_size);
+		if (ptr2 == NULL)
+			return (NULL);
+		return (ptr2);
+	}
+	if (new_size == old_size)
+		return (ptr);
+	if (new_size == 0)
+	{
+		free(ptr);
+		return (NULL);
 	}
 
-	return (arr);
+	ptr2 = malloc(new_size);
+	if (ptr2 == NULL)
+		return (NULL);
+	if (old_size > new_size)
+		size = new_size;
+	else
+		size = old_size;
+
+	filler = ptr2;
+	source = ptr;
+
+	for (i = 0; i < size; i++)
+		filler[i] = source[i];
+
+	free(ptr);
+	return (ptr2);
 }
