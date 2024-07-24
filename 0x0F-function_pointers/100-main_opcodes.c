@@ -1,57 +1,42 @@
-#include "3-calc.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * op_add - add two numbers
- * @a: first number
- * @b: second number
+ * main - prints its own opcodes
+ * @argc: number of arguments
+ * @argv: array of arguments
  *
- * Return: the sum
+ * Return: Always 0 (Success)
  */
-int op_add(int a, int b)
+int main(int argc, char *argv[])
 {
-	return (a + b);
-}
-/**
- * op_sub - subtract b from a
- * @a: the number to subtract from
- * @b: the number to subtract
- *
- * Return: the difference
- */
-int op_sub(int a, int b)
-{
-	return (a - b);
-}
-/**
- * op_mul - multiply a by b
- * @a: the first number
- * @b: the second number
- *
- * Return: the product
- */
-int op_mul(int a, int b)
-{
-	return (a * b);
-}
-/**
- * op_div - divide a by b
- * @a: the dividend
- * @b: the divisor
- *
- * Return: the quotient
- */
-int op_div(int a, int b)
-{
-	return (a / b);
-}
-/**
- * op_mod - divide a by b
- * @a: the dividend
- * @b: the divisor
- *
- * Return: the remainder
- */
-int op_mod(int a, int b)
-{
-	return (a % b);
+	int bytes, i;
+	char *arr;
+
+	if (argc != 2)
+	{
+		printf("Error\n");
+		exit(1);
+	}
+
+	bytes = atoi(argv[1]);
+
+	if (bytes < 0)
+	{
+		printf("Error\n");
+		exit(2);
+	}
+
+	arr = (char *)main;
+
+	for (i = 0; i < bytes; i++)
+	{
+		if (i == bytes - 1)
+		{
+			printf("%02hhx\n", arr[i]);
+			break;
+		}
+		printf("%02hhx ", arr[i]);
+	}
+	return (0);
 }
