@@ -1,35 +1,18 @@
 #include "lists.h"
 
 /**
- * add_nodeint_end - add a new node at the end of a listint_t list
- * @head: the pointer to the pointer pointing to the first node
- * @n: the value of the new node
+ * free_listint - free a listint_t list
+ * @head: pointer to the first node
  *
- * Return: pointer to the new node
  */
-listint_t *add_nodeint_end(listint_t **head, const int n)
+void free_listint(listint_t *head)
 {
-	int a = n;
-	listint_t *new;
-	listint_t *traverse;
+	listint_t *tmp;
 
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
-		return (NULL);
-
-	new->n = a;
-	new->next = NULL;
-
-	if (*head == NULL)
-		*head = new;
-	else
+	while (head)
 	{
-		traverse = *head;
-		while (traverse->next != NULL)
-			traverse = traverse->next;
-
-		traverse->next = new;
+		tmp = head->next;
+		free(head);
+		head = tmp;
 	}
-
-	return (new);
 }
