@@ -1,10 +1,35 @@
-#define MAIN_H
+#include "main.h"
 
-#include <stdio.h>
+/**
+ * _strcat - Concatenates the string pointed to by src to
+ *           the end of the string pointed to by dest.
+ * @dest: The destination string.
+ * @src: The source string.
+ *
+ * Return: A pointer to the resulting string dest.
+ */
+char *_strcat(char *dest, char *src)
+{
+    char *dest_start = dest;
 
-void positive_or_negative(int i);
-int largest_number(int a, int b, int c);
-int convert_day(int month, int day);
-void print_remaining_days(int month, int day, int year);
+    /* Find the end of the destination string */
+    while (*dest != '\0')
+    {
+        dest++;
+    }
 
-#endif /* MAIN_H */ 
+    /* Append the source string to the destination string */
+    while (*src != '\0')
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+
+    /* Add the terminating null byte */
+    *dest = '\0';
+
+    return dest_start;
+}
+
+
